@@ -1,15 +1,19 @@
 {
-  "name": "nodejs-backend",
+  "name": "web-resolver",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
-  "main": "app",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
-  "author": "Farruko",
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "@sparticuz/chromium": "^92.0.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.17.1",
+    "puppeteer-core": "10.0.0"
   }
 }
