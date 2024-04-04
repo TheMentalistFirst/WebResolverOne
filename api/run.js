@@ -11,7 +11,7 @@ export default async function handler(request, response) {
         _executablePath = process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath);
     } else {
         //_executablePath = await chromium.executablePath;
-        _executablePath = "https://github.com/Sparticuz/chromium/releases/download/v110.0.1/chromium-v110.0.1-pack.tar"
+        _executablePath = await chromium.executablePath("https://github.com/Sparticuz/chromium/releases/download/v110.0.1/chromium-v110.0.1-pack.tar");
         
     }
 
