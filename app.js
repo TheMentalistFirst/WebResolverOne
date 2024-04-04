@@ -1,13 +1,16 @@
-import express from 'express';
-import handler from './api/run.js'; 
-import dotenv from 'dotenv';
-dotenv.config();
+const express = require('express');
 
-const app = express();
+const app = express()
+const PORT = 8000
 
-app.get('/resolver', handler);
+app.get('/', (req, res) => {
+    res.send('Hello World')
+})
 
-const PORT = 3000;
+app.get('/about', (req, res) => {
+    res.send('About route 🎉 ')
+})
+
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT} http://localhost:3000/resolver`);
-});
+    console.log(`✅ Server is running on port ${PORT}`);
+})
