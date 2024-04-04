@@ -2,7 +2,7 @@
 //const puppeteer = require("puppeteer-core")
 
 import chromium from "@sparticuz/chromium-min";
-import puppeteer, {Browser} from "puppeteer-core";
+import puppeteer from "puppeteer-core";
 import os from "os";
 
 
@@ -69,7 +69,7 @@ export default async function handler(request, response) {
     })
     */
     const browser = await getBrowser();
-    
+
     console.log(os.platform());
     try {
         const page = await browser.newPage();
