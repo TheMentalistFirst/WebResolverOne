@@ -1,41 +1,23 @@
 //const chromium = require("@sparticuz/chromium")
 //const puppeteer = require("puppeteer-core")
 
-import chromium from "@sparticuz/chromium-min";
+import chromium from "@sparticuz/chromium";
 import puppeteer from "puppeteer-core";
 import os from "os";
 
 
-async function getBrowser() {
-    // local development is broken for this 👇
-    // but it works in vercel so I'm not gonna touch it
-    return puppeteer.launch({
-        args: [...chromium.args, '--hide-scrollbars', '--disable-web-security'],
-        defaultViewport: chromium.defaultViewport,
-        executablePath: await chromium.executablePath(
-            `https://github.com/Sparticuz/chromium/releases/download/v116.0.0/chromium-v116.0.0-pack.tar`
-        ),
-        headless: chromium.headless,
-        ignoreHTTPSErrors: true,
-    });
-}
 
 export default async function handler(request, response) {
     let _executablePath = ""
     if (os.platform() === 'win32') {
-        _executablePath = process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath);
+        _executablePath = process.env.CHROME_EXECUTABLE_PATH;
     } else {
-        //_executablePath = await chromium.executablePath;
-        _executablePath = await chromium.executablePath("https://github.com/Sparticuz/chromium/releases/download/v110.0.1/chromium-v110.0.1-pack.tar");
+        _executablePath = await chromium.executablePath;
 
     }
 
-    // Normal is
-    // url=https://www.example.com&headers=[]
-
     const dataIn64 = request.query.data;
     const data = Buffer.from(dataIn64, 'base64').toString('utf-8');
-    // {"url":"https://bestx.stream/v/dHyG5UeEexI0/","headers":{},"regex":"http.+hls.+stream.+m3u8","wait":1,"js":[]}
     const jsonData = JSON.parse(data);
 
     const headers = jsonData.headers;
@@ -53,7 +35,6 @@ export default async function handler(request, response) {
     console.log(jsCode);
   */
 
-    /*
     const browser = await puppeteer.launch({
         //args: chromium.args,
         executablePath: _executablePath,
@@ -67,8 +48,7 @@ export default async function handler(request, response) {
         ignoreDefaultArgs: ["--disable-extensions"],
         ignoreHTTPSErrors: true,
     })
-    */
-    const browser = await getBrowser();
+
 
     console.log(os.platform());
     try {
