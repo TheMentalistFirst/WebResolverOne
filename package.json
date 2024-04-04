@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@sparticuz/chromium": "^92.0.0",
+    "@sparticuz/chromium-min": "110.0.1",
     "dotenv": "^16.0.3",
     "express": "^4.17.1",
     "puppeteer-core": "10.0.0"

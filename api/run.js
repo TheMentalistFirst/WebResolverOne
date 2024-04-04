@@ -1,7 +1,7 @@
 //const chromium = require("@sparticuz/chromium")
 //const puppeteer = require("puppeteer-core")
 
-import chromium from "@sparticuz/chromium";
+import chromium from "@sparticuz/chromium-min";
 import puppeteer from "puppeteer-core";
 import os from "os";
 
