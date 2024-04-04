@@ -2,8 +2,23 @@
 //const puppeteer = require("puppeteer-core")
 
 import chromium from "@sparticuz/chromium-min";
-import puppeteer from "puppeteer-core";
+import puppeteer, {Browser} from "puppeteer-core";
 import os from "os";
+
+
+async function getBrowser() {
+    // local development is broken for this 👇
+    // but it works in vercel so I'm not gonna touch it
+    return puppeteer.launch({
+        args: [...chromium.args, '--hide-scrollbars', '--disable-web-security'],
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath(
+            `https://github.com/Sparticuz/chromium/releases/download/v116.0.0/chromium-v116.0.0-pack.tar`
+        ),
+        headless: chromium.headless,
+        ignoreHTTPSErrors: true,
+    });
+}
 
 export default async function handler(request, response) {
     let _executablePath = ""
@@ -12,7 +27,7 @@ export default async function handler(request, response) {
     } else {
         //_executablePath = await chromium.executablePath;
         _executablePath = await chromium.executablePath("https://github.com/Sparticuz/chromium/releases/download/v110.0.1/chromium-v110.0.1-pack.tar");
-        
+
     }
 
     // Normal is
@@ -38,6 +53,7 @@ export default async function handler(request, response) {
     console.log(jsCode);
   */
 
+    /*
     const browser = await puppeteer.launch({
         //args: chromium.args,
         executablePath: _executablePath,
@@ -51,6 +67,9 @@ export default async function handler(request, response) {
         ignoreDefaultArgs: ["--disable-extensions"],
         ignoreHTTPSErrors: true,
     })
+    */
+    const browser = await getBrowser();
+    
     console.log(os.platform());
     try {
         const page = await browser.newPage();
